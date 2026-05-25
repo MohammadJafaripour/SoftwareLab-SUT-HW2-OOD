@@ -1,11 +1,11 @@
 package services;
 
-class EmailSender implements MessageSender {
+public class SmsSender implements MessageSender {
+    @Override
     public void sendEmail(String to, String message) {
-        System.out.println("Sending email to " + to + ": " + message);
     }
     @Override
     public void sendSmsMessage(String mobile, String message) {
-        // Empty
-            }
+        System.out.println("Sending SMS to " + mobile + ": " + message);
+    }
 }
