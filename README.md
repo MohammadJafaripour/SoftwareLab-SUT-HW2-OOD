@@ -1,67 +1,9 @@
-<div style="
-  border: 1.5px solid #475569;
-  border-radius: 14px;
-  padding: 22px 24px;
-  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-  color: #e5e7eb;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-  direction: rtl;
-">
+# دانشکده مهندسی کامپیوتر شریف
+# گزارش آزمایش دوم
 
+### نام درس: آزمایشگاه مهندسی نرم‌افزار
 
-  <div style="
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: rgba(59, 130, 246, 0.15);
-    color: #93c5fd;
-    font-size: 34px;
-    letter-spacing: 0.5px;
-    margin-bottom: 14px;
-  ">
-    دانشکده مهندسی کامپیوتر شریف
-  </div>
-
-
-
-
-  <div style="
-    width: 200px;
-    height: 3px;
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
-    border-radius: 999px;
-    margin: 14px auto 16px auto;
-  "></div>
-
-
-  <p style="margin: 8px 0 0 0; font-size: 26px; color: #e2e8f0;">
-	  <span style="color: #93c5fd; font-weight: 700;">گزارش آزمایش دوم</span>
-    
-  </p>
-
-  <p style="margin: 8px 0; font-size: 16px; color: #e2e8f0;">
-    <span style="color: #93c5fd; font-weight: 700;">نام درس:</span>
-    آزمایشگاه مهندسی نرم‌افزار
-  </p>
-
-
-  <p style="margin: 8px 0; font-size: 16px; color: #e2e8f0;">
-    <span style="color: #93c5fd; font-weight: 700;">نویسندگان:</span>
-	    محمد جعفری‌پور ۴۰۱۱۰۵۷۹۷  و محمدامین حیدری 401170553
-  </p>
-
-
-
-
-
-</div>
-
-
-  
-# محمدامین حیدری 401170553
-
-# محمدجعفری‌پور 401105797
+##### نویسندگان: محمد جعفری‌پور ۴۰۱۱۰۵۷۹۷ و محمدامین حیدری 401170553
 
 # گام اول
 
@@ -77,21 +19,20 @@
 | ۱ | افزودن متد جدید `payOnSite(double amount)` برای چاپ و پردازش وضعیت پرداخت حضوری. | `PaymentProcessor` |
 | ۲ | افزودن شرط `case ONSITE:` و فراخوانی متد `payOnSite` در بلوک `switch (paymentType)`. | `ReservationService` |
 
+
 ###  تغییرات مربوط به افزودن قابلیت پیامک 
 
-
 - در **`MessageSender` (اینترفیس):** افزودن امضای متد `sendSmsMessage(String mobile, String message)`.
-- در**`EmailSender` (کلاس):** پیاده‌سازی اجباری و خالی متد `sendSmsMessage` برای رفع خطای کامپایل.
-- در**`SmsSender` (کلاس جدید):** پیاده‌سازی متد ارسال پیامک و رها کردن متد ایمیل به صورت خالی.
-- در**`Notifier` (اِنام):** افزودن ثابت شمارشی `SMS` به لیست.
-- در**`ReservationService` (کلاس هسته):** افزودن شرط `case SMS` به ساختار `switch` اعلان‌ها جهت نمونه‌سازی و فراخوانی `SmsSender`.
-    
+- در **`EmailSender` (کلاس):** پیاده‌سازی اجباری و خالی متد `sendSmsMessage` برای رفع خطای کامپایل.
+- در **`SmsSender` (کلاس جدید):** پیاده‌سازی متد ارسال پیامک و رها کردن متد ایمیل به صورت خالی.
+- در **`Notifier` (اِنام):** افزودن ثابت شمارشی `SMS` به لیست.
+- در **`ReservationService` (کلاس هسته):** افزودن شرط `case SMS` به ساختار `switch` اعلان‌ها جهت نمونه‌سازی و فراخوانی `SmsSender`.
 
 ###  تغییرات مربوط به افزودن پرداخت حضوری 
 
-- در**`PaymentProcessor` (کلاس):** افزودن متد جدید `payOnSite(double amount)` برای پردازش تراکنش حضوری.
-- در**`PaymentMethods` (اِنام):** افزودن ثابت شمارشی `ONSITE` به لیست روش‌های پرداخت.
-- در**`ReservationService` (کلاس هسته):** افزودن شرط `case ONSITE` به ساختار `switch` پرداخت جهت فراخوانی متد `payOnSite`.
+- در **`PaymentProcessor` (کلاس):** افزودن متد جدید `payOnSite(double amount)` برای پردازش تراکنش حضوری.
+- در **`PaymentMethods` (اِنام):** افزودن ثابت شمارشی `ONSITE` به لیست روش‌های پرداخت.
+- در **`ReservationService` (کلاس هسته):** افزودن شرط `case ONSITE` به ساختار `switch` پرداخت جهت فراخوانی متد `payOnSite`.
 
 
 
