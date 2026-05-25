@@ -13,6 +13,10 @@ test readme
 | ۳    | ایجاد کلاس جدید و پیاده‌سازی متد ارسال پیامک          | `SmsSender`          |
 | ۴    | افزودن شرط `case SMS` در ساختار سوییچ کلاس سرویس      | `ReservationService` |
 
+| ردیف | تغیرات مربوط به افزودن روش جدید پرداخت | کلاس تغییر یافته |
+| --- | --- | --- |
+| ۱ | افزودن متد جدید `payOnSite(double amount)` برای چاپ و پردازش وضعیت پرداخت حضوری. | `PaymentProcessor` |
+| ۲ | افزودن شرط `case ONSITE:` و فراخوانی متد `payOnSite` در بلوک `switch (paymentType)`. | `ReservationService` |
 # فاز دوم
 
 | اصل                         | وضعیت          | علت برقراری / نقض                                                                                                                                                                                                |
