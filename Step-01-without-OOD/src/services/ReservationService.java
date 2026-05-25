@@ -43,7 +43,7 @@ public class ReservationService {
                 break;
            case SMS :
                 SmsSender smsSender = new SmsSender();
-                smsSender.sendEmail(res.customer.mobile, "Your reservation confirmed!");
+                smsSender.sendSms(res.customer.mobile, "Your reservation confirmed!");
                 break;
            default:
                 System.out.println("There is no Message Provider");
