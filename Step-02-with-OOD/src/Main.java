@@ -1,10 +1,11 @@
-import constants.PaymentMethods;
 import models.Customer;
 import models.LuxuryRoom;
-import constants.Notifier;
-import services.Reservation;
+import models.Reservation;
 import models.Room;
 import services.ReservationService;
+import services.invoice.InvoicePrinter;
+import services.notification.SmsSender;
+import services.payment.PayPalPayment;
 
 public class Main {
     public static void main(String[] args){
@@ -14,5 +15,16 @@ public class Main {
 
         ReservationService service = new ReservationService();
         service.makeReservation(res, PaymentMethods.PAYPAL, Notifier.EMAIL);
+        
+        // آماده‌سازی سرویس‌ها
+        InvoicePrinter printer = new InvoicePrinter();
+        ReservationService service = new ReservationService(printer);
+        // تزریق وابستگی‌ها در زمان اجرا (Dependency Injection)
+        service.makeReservation(
+                res, 
+                new PayPalPayment(), // تزریق استراتژی پرداخت
+                new SmsSender(),     // تزریق استراتژی پیام‌رسانی
+                customer.getMobile() // مسیر ارتباطی متناسب با استراتژی
+        );
     }
 }

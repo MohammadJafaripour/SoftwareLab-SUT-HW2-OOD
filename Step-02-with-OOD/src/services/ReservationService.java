@@ -1,45 +1,34 @@
 package services;
 
-import constants.Notifier;
-import constants.PaymentMethods;
+import models.Reservation;
+import services.invoice.InvoicePrinter;
+import services.notification.MessageSender;
+import services.payment.PaymentStrategy;
 
 public class ReservationService {
-    private Notifier notifier = Notifier.EMAIL; //default Notifier
-    private PaymentProcessor paymentProcessor = new PaymentProcessor();
+    private InvoicePrinter invoicePrinter;
 
-    public void makeReservation(Reservation res, PaymentMethods paymentType, Notifier notifier){
-        System.out.println("Processing reservation for " + res.customer.name);
+    // رعایت DIP و CRP از طریق Injection
+    public ReservationService(InvoicePrinter invoicePrinter) {
+        this.invoicePrinter = invoicePrinter;
+    }
 
-        if(res.customer.city.equals("Paris")){
+    public void makeReservation(Reservation res, PaymentStrategy paymentMethod, MessageSender notifier, String contactInfo) {
+        System.out.println("Processing reservation for " + res.getCustomer().getName());
+
+        // بررسی تخفیف (بدون نقض PLK)
+        if(res.getCustomer().getCity().equals("Paris")){
             System.out.println("Apply city discount for Paris!");
-            res.room.price *= 0.9;
+            res.applyDiscount(0.10); // 10% تخفیف
         }
 
-        switch (paymentType){
-            case CARD:
-                paymentProcessor.payByCard(res.totalPrice());
-                break;
-            case PAYPAL:
-                paymentProcessor.payByPayPal(res.totalPrice());
-                break;
-            case CASH:
-                paymentProcessor.payByCash(res.totalPrice());
-                break;
-        }
+        // پردازش پرداخت از طریق پولی‌مورفیسم (بدون نیاز به switch-case)
+        paymentMethod.pay(res.calculateTotalPrice());
 
-        System.out.println("----- INVOICE -----");
-        System.out.println("hotel.Customer: " + res.customer.name);
-        System.out.println("hotel.Room: " + res.room.number + " (" + res.room.type + ")");
-        System.out.println("Total: " + res.totalPrice());
-        System.out.println("-------------------");
+        // چاپ فاکتور (رعایت SRP)
+        invoicePrinter.print(res);
 
-       switch (this.notifier){
-           case EMAIL :
-           EmailSender emailSender = new EmailSender();
-           emailSender.sendEmail(res.customer.email, "Your reservation confirmed!");
-           break;
-           default:
-               System.out.println("There is no Message Provider");
-       }
+        // ارسال اعلان (بدون نیاز به switch-case)
+        notifier.send(contactInfo, "Your reservation is confirmed!");
     }
 }
